@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./monitor ifInUcastPkts.2 1 > ifIn &
+./monitor tcpInSegs.0 1 > tcpIn &
+./monitor udpInDatagrams.0 1 > udpIn &
+echo end

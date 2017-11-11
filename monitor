@@ -1,0 +1,13 @@
+#!/bin/bash
+
+mibs=$1
+hold_time=$2
+
+prev=`snmpget -Oqv -v2c -c public localhost $mibs`
+
+while true; do
+	curr=`snmpget -Oqv -v2c -c public localhost $mibs`
+	echo $(( $curr - $prev ))
+	prev=$curr
+	sleep $hold_time
+done
