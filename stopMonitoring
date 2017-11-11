@@ -1,1 +1,1 @@
-sudo killall monitor
+sudo killall monitor gnuplot
