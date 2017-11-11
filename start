@@ -1,6 +1,10 @@
 #!/bin/bash
 
-./monitor ifInUcastPkts.2 1 > ifIn &
-./monitor tcpInSegs.0 1 > tcpIn &
-./monitor udpInDatagrams.0 1 > udpIn &
+ip=$1
+
+./monitor $1 ifInUcastPkts.2 1 > ifIn &
+./monitor $1 tcpInSegs.0 1 > tcpIn &
+./monitor $1 udpInDatagrams.0 1 > udpIn &
+sleep 10
+gnuplot -p ./graphic 1 > /dev/null &
 echo end
