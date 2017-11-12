@@ -2,9 +2,10 @@
 
 ip=$1
 
-./monitor $1 ifInUcastPkts.2 1 > ifIn &
-./monitor $1 tcpInSegs.0 1 > tcpIn &
-./monitor $1 udpInDatagrams.0 1 > udpIn &
+./flowMonitor $1 ifInUcastPkts.2 1 > ifIn &
+./flowMonitor $1 tcpInSegs.0 1 > tcpIn &
+./flowMonitor $1 udpInDatagrams.0 1 > udpIn &
+./hostMonitor $1 hrSWRunPerfCPU 1 > CPU &
 sleep 10
 gnuplot -p ./graphic 1 > /dev/null &
 echo end
