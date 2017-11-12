@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo killall monitor gnuplot
+sudo killall hostMonitor flowMonitor gnuplot
