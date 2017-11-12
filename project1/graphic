@@ -1,3 +1,5 @@
+#!/usr/bin/gnuplot
+
 set terminal x11
 
 set multiplot layout 3, 1 title "Monitoring result"
