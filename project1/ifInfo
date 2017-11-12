@@ -1,0 +1,25 @@
+#!/bin/bash
+
+ip=$1
+get_value="snmpget -v2c -Oqv -c public $ip"
+
+ifNum=`$get_value ifNumber.0`
+for idx in $( seq 1 $ifNum )
+do
+	echo -e '[interface description]:' `$get_value ifDescr.$idx`
+	echo -e '\t[Type]:' `$get_value ifType.$idx`
+	echo -e '\t[physical addr.]:' `$get_value ifPhysAddress.$idx`
+	echo -e '\t[MTU]:' `$get_value  ifMtu.$idx`
+	echo -e '\t[Bandwidth]:' `$get_value ifSpeed.$idx`
+	echo -e '\t[RX packets]:' `$get_value ifInUcastPkts.$idx`\
+			'\n\t\t[errors]:' `$get_value ifInErrors.$idx`\
+			'\n\t\t[dropped]:' `$get_value ifInDiscards.$idx`\
+			'\n\t\t[dropped]:' `$get_value ifInDiscards.$idx`
+	echo -e '\t[TX packets]:' `$get_value ifOutUcastPkts.$idx`\
+			'\n\t\t[errors]:' `$get_value ifOutErrors.$idx`\
+			'\n\t\t[dropped]:' `$get_value ifOutDiscards.$idx`\
+			'\n\t\t[dropped]:' `$get_value ifOutDiscards.$idx`
+	echo -e '\t[RX bytes]:' `$get_value ifInOctets.$idx`
+	echo -e '\t[TX bytes]:' `$get_value ifOutOctets.$idx`
+	echo
+done
