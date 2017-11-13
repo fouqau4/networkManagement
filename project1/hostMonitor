@@ -3,13 +3,13 @@
 ip=$1
 metric=$2
 hold_time=$3
-N=5
+N=$4
 mibs="hrSWRunName $metric"
 
-topNSW=`snmpwalk -v2c -c public $ip $metric | sort -k4 -nr | sed 's/^.\+\.\([0-9]\+\).\+$/\1/' | head -$N`
 
 while true
 do
+	topNSW=`snmpwalk -v2c -c public $ip $metric | sort -k4 -nr | sed 's/^.\+\.\([0-9]\+\).\+$/\1/' | head -$N`
 	i=0
 	for idx in $topNSW
 	do
@@ -25,4 +25,5 @@ do
 		echo $o
 	done
 	sleep $hold_time
+	clear
 done
