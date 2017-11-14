@@ -2,10 +2,11 @@
 
 ip=$1
 
-./flowMonitor $1 ifInUcastPkts.2 1 > ifIn &
-./flowMonitor $1 tcpInSegs.0 1 > tcpIn &
-./flowMonitor $1 udpInDatagrams.0 1 > udpIn &
-./hostMonitor $1 hrSWRunPerfCPU 1 10 > CPU &
-sleep 10
+./flowMonitor $1 ifInUcastPkts.2 30 > ifIn &
+./flowMonitor $1 tcpInSegs.0 30 > tcpIn &
+./flowMonitor $1 udpInDatagrams.0 30 > udpIn &
+./hostMonitor $1 hrSWRunPerfCPU 30 10 > CPU &
+gnome-terminal -e 'sudo snmptrapd -f -Lo'
+sleep 40
 gnuplot -p ./graphic 1 > /dev/null &
 echo end
