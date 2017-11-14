@@ -1,11 +1,24 @@
 #!/bin/bash
 
-hold_time=3
+ip=$1
+interface=$2
+tcpdump_record=$3
+
+sudo tcpdump -i $interface ip and dst host $ip > $tcpdump_record &
+
+threshold=$4
+hold_time=$5
+nm_host=$6
 
 while true
 do
 	begin=`date +"%H:%M:%S"`
 	sleep $hold_time
 	end=`date +"%H:%M:%S"`
-	echo -e "[$begin ~ $end]: "	`./bytesDiff $begin $end`
+	current_diff=`./bytesDiff $begin $end $tcpdump_record`
+	if [ $current_diff -gt $threshold ]
+	then
+		snmptrap -v2c -c public $nm_host '' sysUpTime.0 sysUpTime.0 s 'Warning'
+	fi
+	echo -e "[$begin ~ $end]: $current_diff"
 done
