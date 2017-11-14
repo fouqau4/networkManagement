@@ -1,0 +1,11 @@
+#!/bin/bash
+
+hold_time=3
+
+while true
+do
+	begin=`date +"%H:%M:%S"`
+	sleep $hold_time
+	end=`date +"%H:%M:%S"`
+	echo -e "[$begin ~ $end]: "	`./bytesDiff $begin $end`
+done
