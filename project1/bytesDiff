@@ -1,8 +1,8 @@
 #!/bin/bash
 
-record_file='dump1'
 begin=$1
 end=$2
+record_file=$3
 
-cat $record_file | sed -n "/$begin/,/$end/ {s/^.\+length \(.\+\)$/\1/p;s/^.\+(\([0-9]\+\))$/\1/p}" | tr '\n' '+' | xargs -l  bash -c 'echo $(($0 + 0))'
+cat $record_file | sed -n "/$begin/,/$end/ {s/^.\+length \([0-9]\+\).*$/\1/p;s/^.\+(\([0-9]\+\))$/\1/p}" | tr '\n' '+' | xargs -l  bash -c 'echo $(($0 + 0))'
 
